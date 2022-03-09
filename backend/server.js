@@ -1,6 +1,8 @@
-const http = require('http'); // import du package http de node
-const app = require('./app'); // import de l'application 
-// gestion du port pour le renvoi d'un port valide 
+//code du server créé avec gestion du port et des erreurs
+// ( un serveur écoute des requêtes http pour y répondre)
+const http = require('http'); // import du package HTTP de Node pour créer un serveur 
+const app = require('./app');
+
 const normalizePort = val => {
   const port = parseInt(val, 10);
 
@@ -12,10 +14,12 @@ const normalizePort = val => {
   }
   return false;
 };
-const port = normalizePort(process.env.PORT || '3000');
+
+//port 3000 utilisé par défaut; sinon on utilisera le port envoyé par l'environnement sur lequel tourne le serveur
+const port = normalizePort(process.env.PORT || '3000'); // renvoie d'un port valide
 app.set('port', port);
-// recherche et gestion des erreurs
-const errorHandler = error => {
+
+const errorHandler = error => {  // recherche et gestion des erreurs eventuelles 
   if (error.syscall !== 'listen') {
     throw error;
   }
